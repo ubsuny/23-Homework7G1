@@ -21,3 +21,7 @@ The potential energy function parameters for the Na4Cl4 cluster are defined as f
 https://github.com/ubsuny/CompPhys/blob/main/MinMax/nacl.ipynb
 
 
+  Michaelian, K. (1998). Evolving few-ion clusters of Na and Cl. American Journal of Physics, 66(3), 231–240. https://doi.org/10.1119/1.18851
+
+
+
