@@ -15,3 +15,9 @@ The potential energy function parameters for the Na4Cl4 cluster are defined as f
 4. Use an optimization algorithm to minimize the energy and find the equilibrium configuration.
    Note: We will use CG algorithm for the optimization.
 6. Plot the equilibrium configurations using scatter plots and label them with their energies.
+
+## References
+
+https://github.com/ubsuny/CompPhys/blob/main/MinMax/nacl.ipynb
+
+
