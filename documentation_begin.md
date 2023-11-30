@@ -57,6 +57,16 @@ The graph, shown below, effectively demonstrates how the system's potential ener
 ![Screenshot from 2023-11-30 16-21-14](https://github.com/tirthbha/23-Homework7G1/assets/143649367/4b7c40f2-b1cf-44b9-a546-997aa1e32a47)  
 
 ## 3. Distorted-Rectangular structure
+The equilibrium configuration of distorted-rectangular structure for the tetramer (Na4Cl4) with its optimization is shown in the figure below:    
+![Screenshot from 2023-11-30 17-11-55](https://github.com/tirthbha/23-Homework7G1/assets/143649367/fd88016f-812e-4c5b-a6d5-c3e3f394682e)  
+
+In this configuration, we have distorted  the  initial rectangular structure by allowing slight deviation in one of the position of Na+ ion (having initial position: (0, b, a))  along three different axes (delta_x = -0.02: along length a, delta_y = 0.05: along width b, delta_z = 0.08: along height h) to get the distorted-rectangular configuration for the tetramer Na4Cl4.
+
+
+ ## Optimization: Potential Energy vs. Optimization Steps for Distorted-Rectangle
+ 
+The graph, shown below, depicts that it takes 52 steps for the algorithm to reach the minimum potential energy state. This number of steps indicates the  the lowest energy configuration of the system. Each point on the graph corresponds to the potential energy calculated after each optimization step.  
+![Screenshot from 2023-11-30 17-01-36](https://github.com/tirthbha/23-Homework7G1/assets/143649367/fe559eed-893b-485a-8563-f49468fef555)
 
 
 
