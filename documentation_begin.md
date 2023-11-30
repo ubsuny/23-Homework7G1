@@ -21,7 +21,7 @@ The potential energy function parameters for the Na<sub>4</sub>Cl<sub>4</sub> cl
    This the first configuration among 7, with optimized potential -28.69 eV.
    ![Screenshot from 2023-11-30 14-10-05](https://github.com/tirthbha/23-Homework7G1/assets/143649367/22b9d223-0104-4127-a7b7-067413e24069)
 
-   ## Optimization: Potential Energy vs. Optimization Steps
+   ## Optimization: Potential Energy vs. Optimization Steps for Cube
 
 The graph shown below presents a visualization of how the potential energy of a sodium chloride (Na4Cl4) cluster changes over the course of an optimization process. The optimization aims to find the arrangement of ions that minimizes the potential energy of the system.  
 ![Screenshot from 2023-11-30 14-53-51](https://github.com/tirthbha/23-Homework7G1/assets/143649367/2418e0b3-72f0-4f0f-bc81-04f9aa1f68a9)
@@ -40,6 +40,24 @@ The graph shown below presents a visualization of how the potential energy of a 
 
 
 The graph is instrumental in analyzing the performance of the optimization algorithm applied to the NaCl cluster. By examining the trend and the point of convergence, one can assess the effectiveness of the optimization process in finding a stable arrangement of ions with minimum potential energy.
+## 2. Rectangular structure
+
+The equilibrium configuration of rectangular structure for the tetramer (Na4Cl4) with its optimization is shown in the figure below:  
+![Screenshot from 2023-11-30 16-20-53](https://github.com/tirthbha/23-Homework7G1/assets/143649367/fd02f960-11c0-4d48-b392-068b8670d2e0)    
+
+The plot illustrates the configuration of an ionic cluster consisting of sodium (Na+) and chloride (Cl-) ions. 
+
+- **Initial Positions:** Na+ ions are depicted in blue and Cl- ions in red.
+- **Optimized Positions:** After optimization, Na+ ions are shown in indigo and Cl- ions in green.
+
+
+ ## Optimization: Potential Energy vs. Optimization Steps for Rectangle
+
+The graph, shown below, effectively demonstrates how the system's potential energy is minimized over the course of the optimization process. Notably, it takes 32 steps for the algorithm to reach the minimum potential energy state. This number of steps indicates the efficiency of the optimization process in converging to the lowest energy configuration. Each point on the graph corresponds to the potential energy calculated after each optimization step, providing a clear view of the energy descent.
+![Screenshot from 2023-11-30 16-21-14](https://github.com/tirthbha/23-Homework7G1/assets/143649367/4b7c40f2-b1cf-44b9-a546-997aa1e32a47)  
+
+## 3. Distorted-Rectangular structure
+
 
 
    
