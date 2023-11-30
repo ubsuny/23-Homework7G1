@@ -16,6 +16,12 @@ The potential energy function parameters for the Na4Cl4 cluster are defined as f
    **Note**: We will use CG algorithm for the optimization.
 6. Plot the equilibrium configurations using scatter plots and label them with their energies.
 
+# Configurations
+1. Cubical structure
+   This the first configuration among 7, with optimized potential -28.69 eV.
+   ![cubical_configuration](https://github.com/tirthbha/23-Homework7G1/assets/143649367/72531542-7050-448e-9cd1-4172d712e719)
+
+   
 # References
    -  K. Michaelian, "Evolving few-ion clusters of Na and Cl",Am. J. Phys. 66, 231 (1998)
    -  J. P. Rose and R. S. Berry, J. Chem. Phys. 96, 517–538 ~1992.
