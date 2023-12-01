@@ -1,10 +1,8 @@
 """
-Module to define the Cluster class and related functions.
+Defining Cluster class and related functions.
 """
-
-import itertools
 import numpy as np
-
+import itertools
 # Constants
 KE2 = 197 / 137  # eV-nm   Coulomb force charge
 ALPHA = 1.09e3  # eV      parameter of the model
@@ -26,7 +24,7 @@ def cp(l):
 
 class Cluster:
     """
-    Class of cluster of ions with positions and charges.
+    Class with positions and charges.
     """
     def __init__(self, r_na, r_cl):
         '''
@@ -45,10 +43,10 @@ class Cluster:
 
     def vij(self):
         '''
-        Calculate a numpy vector of all potentials for combinations.
+        Calculate numpy vectors for combinations.
         
         Returns:
-        - Numpy vector of potentials for all combinations.
+        - Numpy vector of potentials .
         '''
         self.Vij_ = np.zeros_like(self.rij)
         pos = self.charge_prods > 0
@@ -59,7 +57,7 @@ class Cluster:
 
     def v(self):
         '''
-        Calculate total potential as sum of Vij vector.
+        Total potential as sum of Vij vector.
         
         Returns:
         - Total potential
@@ -68,7 +66,7 @@ class Cluster:
 
     def get_vals(self):
         '''
-        Get positions interpreted as a flat shape.
+       Positions interpreted as a flat shape.
         
         Returns:
         - Flattened array of positions.
@@ -77,7 +75,7 @@ class Cluster:
 
     def set_vals(self, vals):
         '''
-        Set positions using a flat shape of positions.
+        Set positions.
         
         Parameters:
         - vals: Flat shape of positions
