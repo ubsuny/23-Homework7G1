@@ -1,4 +1,4 @@
-name: Rectangle configuration
+name: Pylint Module
 
 on:
   push:
@@ -28,6 +28,6 @@ jobs:
     - name: List directory contents
       run:  ls -al
     - name: configuration.py
-      run: pylint rectangle_structure.ipynb || exit 0  # Replace with the actual name of your Python script
+      run: pylint module.py || exit 0  # Replace with the actual name of your Python script
 
     
