@@ -2,14 +2,15 @@
 This module contains the definition of a Cluster class that represents a cluster of ions
 and their optimization to an equilibrium configuration using the BFGS algorithm.
 """
+
 import itertools
 import numpy as np
 
-ke2 = 1.44 # eV-nm   Coulomb force charge
-alpha = 1.09e3  # eV      parameter of model
-rho = 0.0317    # nm      parameter of model
-p = 1.0         # eV      regular
-c = 0.01        # nm
+KE2 = 1.44  # eV-nm   Coulomb force charge
+ALPHA = 1.09e3  # eV      parameter of model
+RHO = 0.0317  # nm      parameter of model
+P = 1.0  # eV      regular
+C = 0.01  # nm
 
 def cp(l):
     """Generate all pairs of indices for the elements in list `l`."""
@@ -38,13 +39,13 @@ class Cluster:
         self.potentials_per_step.append(self.V())
 
     def Vij(self):
-        '''Calculate a numpy vector of all of the potentials of the combinations'''
-        self.Vij_ = np.zeros_like(self.rij)
-        pos = self.chargeprods>0
+        """Calculate a numpy vector of all the potentials of the combinations."""
+        self.vij_ = np.zeros_like(self.rij)
+        pos = self.chargeprods > 0
         neg = ~pos
-        self.Vij_[pos] = ke2 / self.rij[pos] + p*(c/self.rij[pos])**12
-        self.Vij_[neg] =-ke2 / self.rij[neg] + alpha*np.exp(-self.rij[neg]/rho) + p*(c/self.rij[neg])**12
-        return self.Vij_
+        self.vij_[pos] = KE2 / self.rij[pos] + P * (C / self.rij[pos])**12
+        self.vij_[neg] = -KE2 / self.rij[neg] + ALPHA * np.exp(-self.rij[neg] / RHO) + P * (C / self.rij[neg])**12
+        return self.vij_
 
     def V(self):
         """Return the total potential, which is a sum of the Vij vector."""
