@@ -1,6 +1,6 @@
 # Equilibrium Configurations Of Sodium Chloride Tetramers.
  The ground state configuration of sodium chloride is face centered cubic structure. However, when the number of ions are changed , different interesting ground state 
- configuartions are observed. The different  ground state configurations of Nacl shows various properties and have practical applications. The paper presents the application 
+ configurations are observed. The different  ground state configurations of Nacl shows various properties and have practical applications. The paper presents the application 
  of genetic code to study the difficult configurations of clusters (ions pairs) with optimization to ground state configurations. For cluster of four ion pairs (Na<sub>4</sub>Cl<sub>4</sub> tetramers) there are seven
  different configurations[^1 ]. Out of seven the configurations with binding energy per ion of -6.7470 eV are chosen for study.
  <img width="555" alt="structure_Na_Cl" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/8204398c-e1a2-4daf-8755-707ce0ae4433">
