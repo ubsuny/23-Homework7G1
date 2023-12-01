@@ -1,8 +1,10 @@
 """
 Defining Cluster class and related functions.
 """
-import numpy as np
+
 import itertools
+import numpy as np
+
 # Constants
 KE2 = 197 / 137  # eV-nm   Coulomb force charge
 ALPHA = 1.09e3  # eV      parameter of the model
@@ -12,7 +14,7 @@ C = 0.01
 
 def cp(l):
     """
-    Generate combinations of elements as list l.
+    Generate combinations of elements from the input list l.
     
     Parameters:
     - l: List of elements
@@ -26,17 +28,17 @@ class Cluster:
     """
     Class with positions and charges.
     """
-    def __init__(self, r_na, r_cl):
+    def __init__(self, sodium_positions, chloride_positions):
         '''
         Initialize the Cluster object.
         
         Parameters:
-        - r_na: Positions of Na ions
-        - r_cl: Positions of Cl ions
+        - sodium_positions: Positions of Na ions
+        - chloride_positions: Positions of Cl ions
         '''
-        self.positions = np.concatenate((r_na, r_cl))
-        self.charges = np.concatenate([np.ones(r_na.shape[0]), np.full(r_cl.shape[0], -1)])
-        self.combs = cp(np.arange(self.charges.size))
+        self.positions = np.hstack((sodium_positions, chloride_positions))
+        self.charges = np.hstack([np.ones(sodium_positions.shape[0]), np.full(chloride_positions.shape[0], -1)])
+        self.combs = generate_combinations(np.arange(self.charges.size))
         self.charge_prods = self.charges[self.combs][:, 0] * self.charges[self.combs][:, 1]
         self.rij = np.linalg.norm(self.positions[self.combs][:, 0] - self.positions[self.combs][:, 1], axis=1)
         self.Vij_ = None
@@ -46,7 +48,7 @@ class Cluster:
         Calculate numpy vectors for combinations.
         
         Returns:
-        - Numpy vector of potentials .
+        - Numpy vector of potentials.
         '''
         self.Vij_ = np.zeros_like(self.rij)
         pos = self.charge_prods > 0
@@ -97,3 +99,4 @@ class Cluster:
         return self.v()
 
 # Run pylint on this modified code to check for further improvements.
+      
