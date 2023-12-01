@@ -1,9 +1,8 @@
 """
 Defining Cluster class and related functions.
 """
-
-import itertools
 import numpy as np
+import itertools
 
 # Constants
 KE2 = 197 / 137  # eV-nm   Coulomb force charge
@@ -42,8 +41,8 @@ class Cluster:
         self.charge_prods = self.charges[self.combs][:, 0] * self.charges[self.combs][:, 1]
         self.rij = np.linalg.norm(self.positions[self.combs][:, 0] - self.positions[self.combs][:, 1], axis=1)
         self.v_ij_ = None
-
-    def vij(self):
+        
+    def v_ij(self):
         '''
         Calculate numpy vectors for combinations.
         
@@ -78,7 +77,6 @@ class Cluster:
     def set_vals(self, vals):
         '''
         Set positions.
-        
         Parameters:
         - vals: Flat shape of positions
         '''
@@ -88,7 +86,6 @@ class Cluster:
     def __call__(self, vals):
         '''
         Function with scipy.optimize.minimize as call.
-        
         Parameters:
         - vals: Positions
         
