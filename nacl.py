@@ -4,13 +4,11 @@ import itertools
 #Constants
 KE2 = 197 / 137 # eV-nm   Coulomb force charge
 ALPHA = 1.09e3  # eV      parameter of model
-RHo = 0.0321    # nm      parameter of model
+RHO = 0.0321    # nm      parameter of model
 B = 1.0         # eV      regular
 C = 0.01   
-
 def cp(l):
     return np.fromiter(itertools.chain(*itertools.combinations(l,2)),dtype=int).reshape(-1,2)
-
 class Cluster:
     def __init__(self, r_na, r_cl):
         '''
