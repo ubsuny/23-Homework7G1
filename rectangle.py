@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  
 from mpl_toolkits.mplot3d.art3d import Line3DCollection  
 import scipy.optimize  
-
 from module import *
+
 # Define side lengths 'a' and 'b'
 a = 0.2 # length
 b = 0.3 # width
