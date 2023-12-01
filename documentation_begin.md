@@ -2,19 +2,62 @@
 
 To determine the equilibrium configurations of Na<sub>4</sub>Cl<sub>4</sub> clusters for tetramers and plot their configurations with energies, we can proceed with the following steps:
 
-1. Define the potential energy function for the Na<sub>4</sub>Cl<sub>4</sub> cluster.
-   For our case the potential energy is of the form:
-![Screenshot from 2023-11-26 22-12-51](https://github.com/tirthbha/23-Homework7G1/assets/143649367/afc6ae15-76d1-41ef-80e6-0ca3a6e33c25)  
+**1. Define the potential energy function for the Na<sub>4</sub>Cl<sub>4</sub> cluster**    
+The potential energy function $\( V(r_{ij}) \$) for a pair of ions is given by:
+
+$$
+V(r_{ij}) = 
+\begin{cases} 
+-\frac{e^2}{4\pi\epsilon_0 r_{ij}} + \alpha e^{-r_{ij}/\rho} + p\left(\frac{c}{r_{ij}}\right)^{12}, & \text{for opposite charges (i.e., + -)} \\
++\frac{e^2}{4\pi\epsilon_0 r_{ij}} + p\left(\frac{c}{r_{ij}}\right)^{12}, & \text{for like charges (i.e., + + or - -)} 
+\end{cases}
+$$
+
+where:
+- $r_{ij}$ is the distance between ions $i$ and $j$.
+- $e$ is the elementary charge.
+- $\epsilon_0$ is the permittivity of free space.
+- $\alpha$ and $\rho$ are parameters that describe the repulsion part of the potential.
+- $c$ is a constant that defines the characteristic length scale for the repulsion term.
+- $p$ is the coefficient for the repulsion term.
+
+
 The potential energy function parameters for the Na<sub>4</sub>Cl<sub>4</sub> cluster are defined as follows:
-- $\ A_{ij} = 423.80 \ eV$
-- $\ \rho = 0.317 \ Å$
+- $\ \alpha  = 1.09e3 nm $
+- $\ \rho = 0.0317 nm $
 - $\ \frac{e^2}{4 \pi \epsilon_0} = 1.44 \ eV·nm$
+- p = 1.0 eV
+- c = 0.01 nm
 
 
-3. Initialize the cluster geometry to an ideal case.
-4. Use an optimization algorithm to minimize the energy and find the equilibrium configuration.  
-   **Note**: We will use CG algorithm for the optimization.
-6. Plot the equilibrium configurations using scatter plots and label them with their energies.
+**2. Initialize the cluster geometry to an ideal case**  
+For instance, the initial configuration for the cubical structure is as shown below:  
+![Screenshot from 2023-12-01 11-14-34](https://github.com/tirthbha/23-Homework7G1/assets/143649367/df3f6377-72f2-425e-b67c-17fde26ac505)  
+
+The configuration is considered as an initial guess for the structure of ionic clusters before optimization with initial potential energy -22.24eV. This configuration is not the optimized structure and will be subjected to an optimization process, commonly referred to as energy minimization. The goal of this process is to find the arrangement of ions that results in the lowest possible potential energy, which corresponds to the most stable configuration of the cluster.
+
+
+**3. Optimization and  the equilibrium configurations**
+   The BFGS algorithm is employed to find the equilibrium configuration by minimizing the potential energy of the system. The equilibrium configuration of cubical structure is shown in the Figure 1. The initial positions of the Na+ ions (blue) and Cl- ions (red) are the starting points before optimization. The optimized positions of the Na+ ions (purple) and Cl- ions (green) represent the equilibrium configuration after the energy minimization process. The optimized potential energy value of -28.69 eV indicates that the system has reached a lower energy state through the optimization process as shown in Figure 2. The process involves iterative adjustments to the positions of the ions to find the configuration that yields the minimum potential energy. 
+ 
+<figure>
+  <img src="https://github.com/tirthbha/23-Homework7G1/assets/143649367/8d90cbcd-c4f0-4ce1-839b-8b3125841a58" alt="Optimized Cluster Configuration">
+  <figcaption>Figure 1: Equilibrium Configuration of the Cube</figcaption>
+</figure>  
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+<figure>
+  <img src="https://github.com/tirthbha/23-Homework7G1/assets/143649367/2418e0b3-72f0-4f0f-bc81-04f9aa1f68a9" alt="Optimized Cluster Configuration">
+  <figcaption>Figure 2: Optimization </figcaption>
+</figure>
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 # Configurations
 ## 1. Cubical structure
@@ -72,16 +115,11 @@ The graph, shown below, depicts that it takes 52 steps for the algorithm to reac
 
    
 # References
+   -  https://github.com/ubsuny/CompPhys/blob/main/MinMax/nacl.ipynb
    -  K. Michaelian, "Evolving few-ion clusters of Na and Cl",Am. J. Phys. 66, 231 (1998)
    -  J. P. Rose and R. S. Berry, J. Chem. Phys. 96, 517–538 ~1992.
-   -
+   -  T. P. Martin, ‘‘NaCl Polymers,’’ J. Chem. Phys. 67, 5207–5212 ~1977.
+   -  T. P. Martin, ‘‘Alkali Halide Clusters and Microcrystals,’’ Phys. Rep. 95, 167–199 ~1983!, and references therein.
 
-
-## References
-
-https://github.com/ubsuny/CompPhys/blob/main/MinMax/nacl.ipynb
-
-
-  Michaelian, K. (1998). Evolving few-ion clusters of Na and Cl. American Journal of Physics, 66(3), 231–240. https://doi.org/10.1119/1.18851
 
 
