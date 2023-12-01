@@ -2,7 +2,7 @@
  The ground state configuration of sodium chloride is face centered cubic structure. However, when the number of ions are changed , different interesting ground state 
  configuartions are observed. The different  ground state configurations of Nacl shows various properties and have practical applications. The paper present the application 
  of genetic code to study the difficult configurations of clusters (ions pairs) with optimization to ground state configurations. For cluster of four ion pairs (Na<sub>4</sub>Cl<sub>4</sub> tetramers) there are seven
- different configurations. Out of seven the configurations with binding energy per ion of -6.7470 eV are chosen for study.
+ different configurations[^1 ]. Out of seven the configurations with binding energy per ion of -6.7470 eV are chosen for study.
  <img width="555" alt="structure_Na_Cl" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/8204398c-e1a2-4daf-8755-707ce0ae4433">
 # Objective
 - To study the structure of (Na<sub>4</sub>Cl<sub>4</sub> tetramers equilibrium configurations using 3D plot.
@@ -16,17 +16,17 @@
   - Scipy.optimize.
 # Potential Energy with Parameters
  Potential energy is defined in terma of attactive and repulsive Coulomb potential for different ions and same ions respectively, small dipole interacttions terms and an additional repulsive pauli energy term for 
- for chloride ions. The constants defined and potential energy is given as:
+ for chloride ions. The constants defined and potential energy is given as[^1]:
  <img width="1102" alt="Potential" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/3c164d7e-838e-4bf5-beb6-6cfc7ceb1cc6">
 # Initial Position Chosen
 For the last two configurations given in paper for,I have chosen square planer structure and tetrahedron structure with binding energy per ion of
--6.7470 eV. The Position for square planer structure is defined as with initial a = 0.5 nm:
+-6.7470 eV[^1]. The Position for square planer structure is defined as with initial a = 0.5 nm:
 ```Python
 a = 0.5
 r_na = np.array( [ [ 0, 0, 0 ], [ a, a, 0 ], [a, 0, a ], [0, a, a]] )
 r_cl = np.array( [ [ a/2, a/2, a/2 ], [ 3*a/2, a/2, a/2 ], [3*a/2, a/2, 3*a/2], [a/2, 3*a/2, 3*a/2] ] )
 ```
-Implementing the code to obtain the initial potential energy and intial positions using defined class cluster;
+Implementing the code to obtain the initial potential energy and intial positions using defined class cluster[^2];
 ```python
 r = Cluster(r_na, r_cl)
 vals_init = cluster.get_vals()
@@ -37,7 +37,7 @@ print('initial V  :', cluster.V() )
 ```
 <img width="834" alt="Initial value" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/c56c6606-6195-45ac-bb0b-26fa03f51d48">
 
-Further using molecular simulation technique system is optimized to its minimum potential state using the code to get the optimized potential energy value and optimized position of sodium and chloride ion.
+Further using molecular simulation technique system is optimized to its minimum potential state using the code to get the optimized potential energy value and optimized position of sodium and chloride ion[^2].
 
 ```python
 res = scipy.optimize.minimize( fun=cluster, x0=vals_init, tol=1e-3, method="BFGS")
@@ -66,7 +66,127 @@ The Final positions of sodium and chloride ions after optimizations are plotted 
 <img width="675" alt="Final_plot_2" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/9e241ac1-7d6c-4737-a9a8-c0a69509ab38">
 
 Thus on studying the two different structures for sodium chloride tetramers, it is observed that the value of optimized potential energy for both configuration is approximately equal as expected. However, the value of binding energy per ion for both configurations are not comparable to the value -6.7470 eV from paper. One possible reason for this anamoly might be due to the arbitrary value of position of sodium and chloride ions chosen while initializing. Further observation of final 
-optimized positions gives somewhat comparable results for the positioning of sodium and chloride ion to that shown figure 4 of paper.
+optimized positions gives somewhat comparable results for the positioning of sodium and chloride ion to that shown figure 4 of paper[^1].
+
+# Pylinting 
+Using the code defined to find the initial 
+
+```python
+"""
+Defining Cluster class and related functions.
+"""
+import itertools
+import numpy as np
+
+# Constants
+KE2 = 197 / 137  # eV-nm   Coulomb force charge
+ALPHA = 1.09e3  # eV      parameter of the model
+RHO = 0.0321    # nm      parameter of the model
+B = 1.0         # eV      regular
+C = 0.01
+
+def cp(l):
+    """
+    Generate combinations of elements from the input list l.
+    
+    Parameters:
+    - l: List of elements
+    
+    Returns:
+    - Combinations of elements taken two at a time.
+    """
+    return np.fromiter(itertools.chain(*itertools.combinations(l, 2)), dtype=int).reshape(-1, 2)
+
+class Cluster:
+    """
+    Class with positions and charges.
+    """
+    def __init__(self, na_positions, cl_positions):
+        '''
+        Initialize the Cluster object.
+        
+        Parameters:
+        - na_positions: Positions of Na ions
+        - cl_positions: Positions of Cl ions
+        '''
+        self.positions = np.hstack((na_positions, cl_positions))
+        self.charges = np.hstack([np.ones(na_positions.shape[0]), np.full(cl_positions.shape[0], -1)])
+        self.combs = cp(np.arange(self.charges.size))
+        self.charge_prods = self.charges[self.combs][:, 0] * self.charges[self.combs][:, 1]
+        self.rij = np.linalg.norm(self.positions[self.combs][:, 0] - self.positions[self.combs][:, 1], axis=1)
+        self.v_ij_ = None
+
+    def v_ij(self):
+        '''
+        Calculate numpy vectors for combinations.
+        
+        Returns:
+        - Numpy vector of potentials.
+        '''
+        self.v_ij_ = np.zeros_like(self.rij)
+        pos = self.charge_prods > 0
+        neg = ~pos
+        self.v_ij_[pos] = KE2 / self.rij[pos] + B * (C / self.rij[pos]) ** 12
+        self.v_ij_[neg] = -KE2 / self.rij[neg] + ALPHA * np.exp(-self.rij[neg] / RHO) + B * (C / self.rij[neg]) ** 12
+        return self.v_ij_
+
+    def v(self):
+        '''
+        Total potential as sum of v_ij vector.
+        
+        Returns:
+        - Total potential
+        '''
+        return np.sum(self.v_ij_)
+
+    def get_vals(self):
+        '''
+        Positions interpreted as a flat shape.
+        
+        Returns:
+        - Flattened array of positions.
+        '''
+        return np.reshape(self.positions, -1)
+
+    def set_vals(self, vals):
+        '''
+        Set positions.
+        
+        Parameters:
+        - vals: Flat shape of positions
+        '''
+        self.positions = vals.reshape(self.positions.shape)
+        self.rij = np.linalg.norm(self.positions[self.combs][:, 0] - self.positions[self.combs][:, 1], axis=1)
+
+    def __call__(self, vals):
+        '''
+        Function with scipy.optimize.minimize as call.
+        
+        Parameters:
+        - vals: Positions
+        
+        Returns:
+        - Potential energy
+        '''
+        self.set_vals(vals)
+        return self.v()
+```
+
+The result for pylint is given below:
+
+<img width="750" alt="pylint" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/94e34ca6-d723-4647-b5ea-026dcec2ae6d">
+
+## References
+
+[^2]: https://github.com/ubsuny/CompPhys/blob/main/MinMax/nacl.ipynb
+[^1]: Michaelian, K. (1998). Evolving few-ion clusters of Na and Cl. American Journal of Physics, 66(3), 231–240. https://doi.org/10.1119/1.18851
+
+
+
+
+
+
+
 
 
 
