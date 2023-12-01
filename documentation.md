@@ -15,12 +15,12 @@
   - Matplotlib with toolkits
   - Scipy.optimize.
 # Potential Energy with Parameters
- Potential energy is defined in terma of attactive and repulsive Coulomb potential for different ions and same ions respectively, small dipole interacttions terms and an additional repulsive pauli energy term for 
+ Potential energy is defined in terma of attactive and repulsive Coulomb potential for different ions and same ions respectively, small dipole interacttions terms and an additional repulsive Pauli  repulsive energy term 
  for chloride ions. The constants defined and potential energy is given as[^1]:
  <img width="1102" alt="Potential" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/3c164d7e-838e-4bf5-beb6-6cfc7ceb1cc6">
 # Initial Position Chosen
-For the last two configurations given in paper for,I have chosen square planer structure and tetrahedron structure with binding energy per ion of
--6.7470 eV[^1]. The Position for square planer structure is defined as with initial a = 0.5 nm:
+For the last two configurations given in paper,I have chosen square planer structure and tetrahedron structure with binding energy per ion of
+-6.7470 eV[^1]. The position for square planer structure is defined as with initial a = 0.5 nm:
 ```Python
 a = 0.5
 r_na = np.array( [ [ 0, 0, 0 ], [ a, a, 0 ], [a, 0, a ], [0, a, a]] )
@@ -37,7 +37,7 @@ print('initial V  :', cluster.V() )
 ```
 <img width="834" alt="Initial value" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/c56c6606-6195-45ac-bb0b-26fa03f51d48">
 
-Further using molecular simulation technique system is optimized to its minimum potential state using the code to get the optimized potential energy value and optimized position of sodium and chloride ion[^2].
+Further using molecular simulation technique, system is optimized to its minimum potential state using the code to get the optimized potential energy value and optimized position of sodium and chloride ion is obtained[^2].
 
 ```python
 res = scipy.optimize.minimize( fun=cluster, x0=vals_init, tol=1e-3, method="BFGS")
@@ -48,7 +48,7 @@ print("Final potential:", res.fun)
 ```
 <img width="1179" alt="Final Potential" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/e3baa4ee-5f4f-4f79-9ccf-171f4891d0bc">
 
-The Final positions of sodium and chloride ions after optimizations are plotted using matplot.lib library toolkits for 3D visualizations. 
+The final positions of sodium and chloride ions after optimizations are plotted using matplot.lib library toolkits for 3D visualizations. 
 <img width="776" alt="config_1" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/d27abb29-3de0-4240-abe5-565dda620c3e">
 
 Similarly on using the code defined above the initial position defined for second structure chosen is;
@@ -57,7 +57,7 @@ a = 0.5
 r_na = np.array( [ [ 0, 0, 0 ], [ 0, 0, 2*a ], [0, a, a ], [0, 2*a, -0.5*a]] )
 r_cl = np.array( [ [ 0, 0, a], [ 0, a, 2*a], [a, a, 0], [a, -a, 0] ] )
 ```
-The initial potential value before optimization is equal to -11.89 eV
+The initial potential value before optimization is equal to -11.89 eV.
 
 Further the optimized value of potential and positions of sodium and chloride ions are;
 <img width="711" alt="Final Position" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/5d3c58b5-4916-4e69-bdde-60c5728c0328">
