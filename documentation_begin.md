@@ -115,16 +115,11 @@ The graph, shown below, depicts that it takes 52 steps for the algorithm to reac
 
    
 # References
+   -  https://github.com/ubsuny/CompPhys/blob/main/MinMax/nacl.ipynb
    -  K. Michaelian, "Evolving few-ion clusters of Na and Cl",Am. J. Phys. 66, 231 (1998)
    -  J. P. Rose and R. S. Berry, J. Chem. Phys. 96, 517–538 ~1992.
-   -
+   -  T. P. Martin, ‘‘NaCl Polymers,’’ J. Chem. Phys. 67, 5207–5212 ~1977.
+   -  T. P. Martin, ‘‘Alkali Halide Clusters and Microcrystals,’’ Phys. Rep. 95, 167–199 ~1983!, and references therein.
 
-
-## References
-
-https://github.com/ubsuny/CompPhys/blob/main/MinMax/nacl.ipynb
-
-
-  Michaelian, K. (1998). Evolving few-ion clusters of Na and Cl. American Journal of Physics, 66(3), 231–240. https://doi.org/10.1119/1.18851
 
 
