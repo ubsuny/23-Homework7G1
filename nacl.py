@@ -38,10 +38,10 @@ class Cluster:
         '''
         self.positions = np.hstack((sodium_positions, chloride_positions))
         self.charges = np.hstack([np.ones(sodium_positions.shape[0]), np.full(chloride_positions.shape[0], -1)])
-        self.combs = generate_combinations(np.arange(self.charges.size))
+        self.combs = cp(np.arange(self.charges.size))
         self.charge_prods = self.charges[self.combs][:, 0] * self.charges[self.combs][:, 1]
         self.rij = np.linalg.norm(self.positions[self.combs][:, 0] - self.positions[self.combs][:, 1], axis=1)
-        self.Vij_ = None
+        self.v_ij_ = None
 
     def vij(self):
         '''
@@ -50,21 +50,21 @@ class Cluster:
         Returns:
         - Numpy vector of potentials.
         '''
-        self.Vij_ = np.zeros_like(self.rij)
+        self.v_ij_ = np.zeros_like(self.rij)
         pos = self.charge_prods > 0
         neg = ~pos
-        self.Vij_[pos] = KE2 / self.rij[pos] + B * (C / self.rij[pos]) ** 12
-        self.Vij_[neg] = -KE2 / self.rij[neg] + ALPHA * np.exp(-self.rij[neg] / RHO) + B * (C / self.rij[neg]) ** 12
-        return self.Vij_
+        self.v_ij_[pos] = KE2 / self.rij[pos] + B * (C / self.rij[pos]) ** 12
+        self.v_ij_[neg] = -KE2 / self.rij[neg] + ALPHA * np.exp(-self.rij[neg] / RHO) + B * (C / self.rij[neg]) ** 12
+        return self.v_ij_
 
     def v(self):
         '''
-        Total potential as sum of Vij vector.
+        Total potential as sum of v_ij vector.
         
         Returns:
         - Total potential
         '''
-        return np.sum(self.vij())
+        return np.sum(self.v_ij())
 
     def get_vals(self):
         '''
