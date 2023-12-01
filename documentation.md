@@ -69,7 +69,8 @@ Thus on studying the two different structures for sodium chloride tetramers, it 
 optimized positions gives somewhat comparable results for the positioning of sodium and chloride ion to that shown figure 4 of paper[^1].
 
 # Pylinting 
-Using the code defined to find the initial 
+Based on the differnt functions defined to calculate the final optimized potential and positions of sodium and chloride ions using the position and charge attribues, brief description of how code works is explained here:
+The code is defined in such a way which initializes the objects of the class with attributes r_na and r_cl representing the properties of the cluster class. Further the position of sodium and chloride ions are concatenated to assign the results to the respective attributes. The line checks all possible combination from the array defined for both attributes. On computing the distance betweent the pair of ions, the result is stored in position attribute. The potentials is calculated based on the conditions: for pairs of positive charges potential is calulated using combination of Coulombic and Lennard_Jones terms and for pairs with negative charges potential is calculated using the combination of Coulombic, Pauli repulsion and Lennard Jones terms. Finally is total potential is calculated using the sum of all elements in the vector using np.sum. Finally, the final position and total potential energy is updated.
 
 ```python
 """
