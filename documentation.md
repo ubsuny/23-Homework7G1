@@ -37,6 +37,24 @@ print('initial V  :', cluster.V() )
 ```
 <img width="834" alt="Initial value" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/c56c6606-6195-45ac-bb0b-26fa03f51d48">
 
+Further using molecular simulation technique system is optimized to its minimum potential state using the code to get the optimized potential energy value and optimized position of sodium and chloride ion.
+
+```python
+res = scipy.optimize.minimize( fun=cluster, x0=vals_init, tol=1e-3, method="BFGS")
+cluster.set_vals(res.x)  # For some reason, "minimize" is not updating the class at the last iteration
+print ("Final optimized cluster positions")
+print(cluster.positions)
+print("Final potential:", res.fun)
+```
+<img width="1179" alt="Final Potential" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/e3baa4ee-5f4f-4f79-9ccf-171f4891d0bc">
+
+The Final positions of sodium and chloride ions after optimizations are plotted using matplot.lib library toolkits for 3D visualizations. 
+<img width="776" alt="config_1" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/d27abb29-3de0-4240-abe5-565dda620c3e">
+
+Similarly on using the code defined above the initial position defined for second structure chosen is;
+
+
+
 
     
 
