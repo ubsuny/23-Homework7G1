@@ -1,5 +1,9 @@
-import numpy as np
+"""
+Module to define the Cluster class and related functions.
+"""
+
 import itertools
+import numpy as np
 
 # Constants
 KE2 = 197 / 137  # eV-nm   Coulomb force charge
@@ -21,6 +25,9 @@ def cp(l):
     return np.fromiter(itertools.chain(*itertools.combinations(l, 2)), dtype=int).reshape(-1, 2)
 
 class Cluster:
+    """
+    Class representing a cluster of ions with positions and charges.
+    """
     def __init__(self, r_na, r_cl):
         '''
         Initialize the Cluster object.
@@ -32,10 +39,11 @@ class Cluster:
         self.positions = np.concatenate((r_na, r_cl))
         self.charges = np.concatenate([np.ones(r_na.shape[0]), np.full(r_cl.shape[0], -1)])
         self.combs = cp(np.arange(self.charges.size))
-        self.chargeprods = self.charges[self.combs][:, 0] * self.charges[self.combs][:, 1]
+        self.charge_prods = self.charges[self.combs][:, 0] * self.charges[self.combs][:, 1]
         self.rij = np.linalg.norm(self.positions[self.combs][:, 0] - self.positions[self.combs][:, 1], axis=1)
+        self.Vij_ = None
 
-    def Vij(self):
+    def vij(self):
         '''
         Calculate a numpy vector of all potentials for the combinations.
         
@@ -43,20 +51,20 @@ class Cluster:
         - Numpy vector of potentials for all combinations.
         '''
         self.Vij_ = np.zeros_like(self.rij)
-        pos = self.chargeprods > 0
+        pos = self.charge_prods > 0
         neg = ~pos
         self.Vij_[pos] = KE2 / self.rij[pos] + B * (C / self.rij[pos]) ** 12
         self.Vij_[neg] = -KE2 / self.rij[neg] + ALPHA * np.exp(-self.rij[neg] / RHO) + B * (C / self.rij[neg]) ** 12
         return self.Vij_
 
-    def V(self):
+    def v(self):
         '''
         Calculate the total potential, which is the sum of the Vij vector.
         
         Returns:
         - Total potential
         '''
-        return np.sum(self.Vij())
+        return np.sum(self.vij())
 
     def get_vals(self):
         '''
@@ -88,7 +96,6 @@ class Cluster:
         - Potential energy
         '''
         self.set_vals(vals)
-        return self.V()
+        return self.v()
 
-   
-       
+# Run pylint on this modified code to check for further improvements.
