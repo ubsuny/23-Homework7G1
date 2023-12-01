@@ -1,10 +1,9 @@
-# Equilibrium configuration of Rectangle
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-from mpl_toolkits.mplot3d.art3d import Line3DCollection
+"""
+This module contains the definition of a Cluster class that represents a cluster of ions
+and their optimization to an equilibrium configuration using the BFGS algorithm.
+"""
 import itertools
-import scipy.optimize
+import numpy as np
 
 ke2 = 1.44 # eV-nm   Coulomb force charge
 alpha = 1.09e3  # eV      parameter of model
@@ -13,27 +12,28 @@ p = 1.0         # eV      regular
 c = 0.01        # nm
 
 def cp(l):
-    return np.fromiter(itertools.chain(*itertools.combinations(l,2)),dtype=int).reshape(-1,2)
+    """Generate all pairs of indices for the elements in list `l`."""
+    return np.fromiter(itertools.chain(*itertools.combinations(l, 2)), dtype=int).reshape(-1, 2)
 
 class Cluster:
+    """Represents a cluster of ions."""
+
     def __init__(self, r_na, r_cl):
-        '''
-        Inputs the list of Na and Cl positions. Na has charge +1, Cl has -1.
-        The array of ions itself does not change throughout the calculation, and
-        neither do the charges. As such, we can just compute the combinations one time
-        and refer to it throughout the calculation.
-        '''
-        self.positions = np.concatenate( (r_na,r_cl))
-        self.charges = np.concatenate( [np.ones(r_na.shape[0]), np.full(r_cl.shape[0], -1)] )
+        """
+        Initialize the Cluster with positions of Na+ and Cl- ions.
+        """
+        self.positions = np.concatenate((r_na, r_cl))
+        self.charges = np.concatenate([np.ones(r_na.shape[0]), np.full(r_cl.shape[0], -1)])
         self.combs = cp(np.arange(self.charges.size))
-        self.chargeprods = self.charges[self.combs][:,0] * self.charges[self.combs][:,1]
-        self.rij = np.linalg.norm(self.positions[self.combs][:,0] - self.positions[self.combs][:,1], axis=1)
+        self.chargeprods = self.charges[self.combs][:, 0] * self.charges[self.combs][:, 1]
+        self.rij = np.linalg.norm(
+            self.positions[self.combs][:, 0] - self.positions[self.combs][:, 1], axis=1
+        )
         self.potentials_per_step = []
+        self.vij_ = None  # Initialize the attribute for later use
 
     def callback(self, xk):
-        """
-        Callback function to capture the potential at each step.
-        """
+        """Capture the potential at each step."""
         self.set_vals(xk)
         self.potentials_per_step.append(self.V())
 
@@ -47,21 +47,21 @@ class Cluster:
         return self.Vij_
 
     def V(self):
-        '''Total potential, which is a sum of the Vij vector'''
+        """Return the total potential, which is a sum of the Vij vector."""
         return np.sum(self.Vij())
 
     def get_vals(self):
-        '''Positions interpreted as a flat shape'''
+        """Return positions interpreted as a flat shape."""
         return np.reshape(self.positions, -1)
 
-    def set_vals(self, vals ):
-        '''Inputs flat shape of positions, used by __call__'''
+    def set_vals(self, vals):
+        """Set a flat shape of positions, used by __call__."""
         self.positions = vals.reshape(self.positions.shape)
-        self.rij = np.linalg.norm(self.positions[self.combs][:,0] - self.positions[self.combs][:,1], axis=1)
-
+        self.rij = np.linalg.norm(
+            self.positions[self.combs][:, 0] - self.positions[self.combs][:, 1], axis=1
+        )
 
     def __call__(self, vals):
-        '''Function that  scipy.optimize.minimize will call'''
+        """Function that scipy.optimize.minimize will call."""
         self.set_vals(vals)
-        potential = self.V()
-        return potential
+        return self.V()
