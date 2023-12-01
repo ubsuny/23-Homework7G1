@@ -1,6 +1,6 @@
 # Equilibrium Configurations Of Sodium Chloride Tetramers.
  The ground state configuration of sodium chloride is face centered cubic structure. However, when the number of ions are changed , different interesting ground state 
- configuartions are observed. The different  ground state configurations of Nacl shows various properties and have practical applications. The paper present the application 
+ configurations are observed. The different  ground state configurations of Nacl shows various properties and have practical applications. The paper presents the application 
  of genetic code to study the difficult configurations of clusters (ions pairs) with optimization to ground state configurations. For cluster of four ion pairs (Na<sub>4</sub>Cl<sub>4</sub> tetramers) there are seven
  different configurations[^1 ]. Out of seven the configurations with binding energy per ion of -6.7470 eV are chosen for study.
  <img width="555" alt="structure_Na_Cl" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/8204398c-e1a2-4daf-8755-707ce0ae4433">
@@ -62,7 +62,7 @@ The initial potential value before optimization is equal to -11.89 eV.
 Further the optimized value of potential and positions of sodium and chloride ions are;
 <img width="711" alt="Final Position" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/5d3c58b5-4916-4e69-bdde-60c5728c0328">
 
-The Final positions of sodium and chloride ions after optimizations are plotted using matplot.lib library toolkits for 3D visualizations. 
+The final positions of sodium and chloride ions after optimizations are plotted using matplot.lib library toolkits for 3D visualizations. 
 <img width="675" alt="Final_plot_2" src="https://github.com/pratibha77118/23-Homework7G1/assets/72980895/9e241ac1-7d6c-4737-a9a8-c0a69509ab38">
 
 Thus on studying the two different structures for sodium chloride tetramers, it is observed that the value of optimized potential energy for both configuration is approximately equal as expected. However, the value of binding energy per ion for both configurations are not comparable to the value -6.7470 eV from paper. One possible reason for this anamoly might be due to the arbitrary value of position of sodium and chloride ions chosen while initializing. Further observation of final 
