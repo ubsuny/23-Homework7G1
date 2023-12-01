@@ -14,7 +14,7 @@ C = 0.01
 
 def cp(l):
     """
-    Generate combinations of elements from the input list l.
+    Generate combinations of elements as list l.
     
     Parameters:
     - l: List of elements
@@ -26,7 +26,7 @@ def cp(l):
 
 class Cluster:
     """
-    Class representing a cluster of ions with positions and charges.
+    Class of cluster of ions with positions and charges.
     """
     def __init__(self, r_na, r_cl):
         '''
@@ -45,7 +45,7 @@ class Cluster:
 
     def vij(self):
         '''
-        Calculate a numpy vector of all potentials for the combinations.
+        Calculate a numpy vector of all potentials for combinations.
         
         Returns:
         - Numpy vector of potentials for all combinations.
@@ -59,7 +59,7 @@ class Cluster:
 
     def v(self):
         '''
-        Calculate the total potential, which is the sum of the Vij vector.
+        Calculate total potential as sum of Vij vector.
         
         Returns:
         - Total potential
@@ -87,7 +87,7 @@ class Cluster:
 
     def __call__(self, vals):
         '''
-        Function that scipy.optimize.minimize will call.
+        Function with scipy.optimize.minimize as call.
         
         Parameters:
         - vals: Positions
